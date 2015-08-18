@@ -1,0 +1,21 @@
+AddType application/x-httpd-php54 .php
+
+RewriteCond %{THE_REQUEST} !^POST
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+/)*index\.php/([^\ ]*)\ HTTP/
+RewriteCond %{SERVER_PORT}>s ^(443>(s)|[0-9]+>s)$
+RewriteRule ^(([^/]+/)*)index\.php/(.*)$ http%2://www.a-velis.com/$1$2 [R=301,L]
+
+########## Begin - 301 Redirect
+#
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+/)*(index|home)\.html?\ HTTP/
+RewriteRule ^(([^/]+/)*)(index|home)\.html?$ http://www.a-velis.com/$1 [R=301,L]
+#
+RewriteCond %{THE_REQUEST} !^POST
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+/)*index\.php\ HTTP/
+RewriteCond %{SERVER_PORT}>s ^(443>(s)|[0-9]+>s)$
+RewriteRule ^(([^/]+/)*)index\.php$ http%2://www.a-velis.com/$1 [R=301,L]
+#
+RewriteCond %{HTTP_HOST} !^(www\.a-velis\.com)?$
+RewriteRule (.*) http://www.a-velis.com/$1 [R=301,L]
+#
+########## End - 301 Redirect
